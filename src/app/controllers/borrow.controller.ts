@@ -11,40 +11,7 @@ borrowRoutes.post(
     try {
       const { book, quantity, dueDate } = req.body;
 
-      /*     // check if the book exists
-            const existingBook = await Book.findById(book)
-            if (!existingBook) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Book not found'
-                })
-            }
     
-            // check if the book has enough available copies
-            if (existingBook.copies < quantity) {
-                return res.status(400).json({
-                    success: false,
-                    message: "Not enough copies available",
-                })
-            }
-    
-            const newCopies = existingBook.copies - quantity;
-    
-            const updatedFields: any = {
-                copies: newCopies
-            };
-    
-            if (newCopies === 0) {
-                updatedFields.available = false;
-            }
-    
-            await Book.findByIdAndUpdate(book, updatedFields, {
-                new: true,
-                runValidators: true
-            })
-    
-            // save the borrow record
-            const borrow = await BorrowDetails.create({ book, quantity, dueDate }) */
 
       await Book.borrowBook(book, quantity);
 
@@ -76,9 +43,9 @@ borrowRoutes.get(
         },
         {
           $lookup: {
-            from: "books", // the actual MongoDB collection name
-            localField: "_id", // _id here is from the group stage, i.e. book._id
-            foreignField: "_id", // matches the actual Book _id in books collection
+            from: "books", 
+            localField: "_id", 
+            foreignField: "_id",
             as: "bookDetails",
           },
         },

@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://bookwish3.netlify.app"],
+    credentials: true,
   })
 );
 

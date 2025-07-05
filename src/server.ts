@@ -8,7 +8,7 @@ const port = 5000;
 
 async function main() {
   try {
-    await mongoose.connect(`${process.env.mongo_uri}`);
+    await mongoose.connect(`${process.env.MONGO_URI}`);
 
     console.log("✅ Connected to MongoDB using Mongoose");
 

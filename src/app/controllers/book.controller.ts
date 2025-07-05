@@ -33,31 +33,16 @@ booksRoutes.get(
         limit = "10",
         page = "1",
       } = req.query;
-      // console.log('sort', sort);
-      // console.log('sortBy', sortBy);
-
-      // console.log(filter);
+  
       const query: any = {};
       if (filter) {
         query.genre = filter;
-        // console.log('query', query);
-        // console.log('filter', filter);
+    
       }
 
       const sortOrder = sort === "desc" ? -1 : 1;
 
-      // const books = await Book.find({ genre: filter })
-      /*  const books = await Book.find(query)
-             .sort({ [sortBy as string]: sortOrder })
-             .limit((Number(limit)))
- 
-         res.status(201).json({
-             success: true,
-             message: 'Books retrieved successfully',
-             data: books
-         }) */
 
-      // pagination logic
       const skip = (Number(page) - 1) * Number(limit);
 
       const [books, total] = await Promise.all([
